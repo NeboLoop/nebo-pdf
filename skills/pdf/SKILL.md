@@ -1,12 +1,19 @@
 ---
 name: pdf
-description: Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.
-license: Proprietary. LICENSE.txt has complete terms
+description: "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill."
+license: MIT
 ---
 
 # PDF — Document Generation & Manipulation
 
 Generate and manipulate PDF files from JSON specifications using the `nebo-pdf` binary. Compiled Rust with `printpdf` (create) and `lopdf` (fill/extract).
+
+## Helper Skills
+
+| Skill | What it covers |
+|-------|---------------|
+| [`pdf-elements`](../pdf-elements/SKILL.md) | Tables, images, positioned elements, watermarks |
+| [`pdf-forms`](../pdf-forms/SKILL.md) | Form filling, text extraction |
 
 ## Commands
 
@@ -77,88 +84,12 @@ Sizes: h1 = 2× base, h2 = 1.5×, h3 = 1.25×, h4 = 1.1×
 { "paragraph": "Regular text that wraps automatically within the page margins." }
 ```
 
-### Table
-```json
-{
-  "table": [
-    ["Item", "Qty", "Price", "Total"],
-    ["Widget A", "10", "$25", "$250"],
-    ["Widget B", "5", "$50", "$250"]
-  ],
-  "header-rows": 1
-}
-```
-
-Header rows render in bold. Table draws grid lines automatically.
-
-### Image
-```json
-{ "image": "logo.png", "width": 2, "height": 1 }
-{ "image": "chart.png", "x": 5, "y": 2, "width": 3, "height": 2 }
-```
-
-- Width/height in inches
-- Optional `x`, `y` for absolute positioning (inches from left/top)
-- Images loaded from `--assets` directory
-
-## Positioned Elements
-
-Omit `x`/`y` for flow mode (content stacks top-to-bottom). Include them for absolute positioning:
-
-```json
-{ "paragraph": "This flows normally" },
-{ "paragraph": "This is positioned", "x": 5, "y": 2 }
-```
-
-## Watermark
-
-```json
-"watermark": {
-  "text": "DRAFT",
-  "color": "CCCCCC",
-  "rotate": 45,
-  "size": 72
-}
-```
-
-Applied to every page.
-
 ## Built-in Fonts
 
 Available without embedding:
 - **Helvetica** (default) — clean sans-serif
 - **Times-Roman** — classic serif
 - **Courier** — monospace
-
-## Form Filling
-
-Fill an existing PDF form with values:
-
-```bash
-nebo-pdf fill template.pdf fields.json -o filled.pdf
-```
-
-`fields.json`:
-```json
-{
-  "name": "John Doe",
-  "date": "2026-01-15",
-  "amount": "500.00",
-  "approved": true
-}
-```
-
-Keys match PDF form field names (the `T` attribute in AcroForm fields).
-
-## Text Extraction
-
-Extract text from an existing PDF to JSON:
-
-```bash
-nebo-pdf extract document.pdf -o output.json --pretty
-```
-
-Returns a PdfSpec with paragraphs extracted per page.
 
 ## Example: Invoice
 
