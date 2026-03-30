@@ -2,6 +2,11 @@
 name: pdf-elements
 description: "PDF elements: tables, images, positioned elements, watermarks."
 license: MIT
+triggers:
+  - pdf table
+  - pdf image
+  - watermark
+  - pdf watermark
 ---
 
 # pdf +elements

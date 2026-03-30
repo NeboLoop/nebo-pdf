@@ -2,6 +2,12 @@
 name: pdf-forms
 description: "PDF forms: filling existing PDF form fields, extracting text from PDFs."
 license: MIT
+triggers:
+  - pdf form
+  - fill form
+  - form field
+  - extract text
+  - pdf extract
 ---
 
 # pdf +forms
