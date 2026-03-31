@@ -6,14 +6,14 @@
   "description": "PDF generation, form filling, and text extraction",
   "author": "NeboLoop",
   "platforms": {
-    "macos-arm64": {
+    "darwin-arm64": {
       "binaryName": "nebo-pdf",
       "sha256": "",
       "signature": "",
       "size": 0,
       "downloadUrl": ""
     },
-    "macos-amd64": {
+    "darwin-amd64": {
       "binaryName": "nebo-pdf",
       "sha256": "",
       "signature": "",
